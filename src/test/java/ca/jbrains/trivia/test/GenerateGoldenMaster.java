@@ -3,6 +3,7 @@ package ca.jbrains.trivia.test;
 import com.adaptionsoft.games.uglytrivia.Game;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,6 +15,10 @@ public class GenerateGoldenMaster {
     public static void main(String[] args) throws Exception {
         final Path goldenMasterOutputRoot = Paths.get("test", "data");
         Files.createDirectories(goldenMasterOutputRoot);
+        new GenerateGoldenMaster().runGame(goldenMasterOutputRoot);
+    }
+
+    private void runGame(Path goldenMasterOutputRoot) throws IOException {
         final Path goldenMasterOutputPath = goldenMasterOutputRoot.resolve("game-762.txt");
         final FileOutputStream canvas = new FileOutputStream(goldenMasterOutputPath.toFile());
         System.setOut(new PrintStream(canvas));
