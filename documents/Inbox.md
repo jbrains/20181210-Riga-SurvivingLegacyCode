@@ -6,5 +6,8 @@
 
 ## Design Ideas
 
+- Game should be able to write to any output stream/Writer.
+- 
+
 
 
