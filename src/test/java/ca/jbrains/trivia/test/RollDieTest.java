@@ -15,11 +15,8 @@ public class RollDieTest {
     }
 
     private static class SinglePlayerGame extends Game {
-        {
-            add("::the only player's name::");
-        }
-
         public SinglePlayerGame(int theStartingPlaceOfTheOnlyPlayer) {
+            add("::the only player's name::");
             places[0] = theStartingPlaceOfTheOnlyPlayer;
         }
 
