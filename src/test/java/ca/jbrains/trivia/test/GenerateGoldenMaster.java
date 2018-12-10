@@ -24,7 +24,7 @@ public class GenerateGoldenMaster {
                 new FileOutputStream(goldenMasterOutputRoot.resolve(String.format("game-%s.txt", 762)).toFile()));
     }
 
-    private void runGame(final int gameNumber, final OutputStream canvas) throws IOException {
+    public void runGame(final int gameNumber, final OutputStream canvas) throws IOException {
         System.setOut(new PrintStream(canvas));
 
         Game aGame = new Game();
