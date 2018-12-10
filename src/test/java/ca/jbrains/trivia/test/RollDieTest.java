@@ -6,6 +6,7 @@ import org.junit.Test;
 public class RollDieTest {
     @Test
     public void happyPath() throws Exception {
-        new Game();
+        final Game game = new Game();
+        game.roll(3);
     }
 }
