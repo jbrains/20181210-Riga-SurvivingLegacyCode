@@ -14,14 +14,19 @@ import java.util.Random;
 public class GenerateGoldenMaster {
 
     public static void main(String[] args) throws Exception {
-        final Path goldenMasterOutputRoot = Paths.get("test", "data");
+        final Path goldenMasterOutputRoot = rootPath();
         Files.createDirectories(goldenMasterOutputRoot);
-        new GenerateGoldenMaster().runGame(goldenMasterOutputRoot);
+
+        new GenerateGoldenMaster().runGame(762,
+                new FileOutputStream(outputPathForGame(rootPath(), 762).toFile()));
     }
 
-    private void runGame(Path goldenMasterOutputRoot) throws IOException {
-        runGame(762,
-                new FileOutputStream(goldenMasterOutputRoot.resolve(String.format("game-%s.txt", 762)).toFile()));
+    public static Path rootPath() {
+        return Paths.get("test", "data");
+    }
+
+    public static Path outputPathForGame(Path goldenMasterOutputRoot, final int gameNumber) {
+        return goldenMasterOutputRoot.resolve(String.format("game-%s.txt", gameNumber));
     }
 
     public void runGame(final int gameNumber, final OutputStream canvas) throws IOException {
