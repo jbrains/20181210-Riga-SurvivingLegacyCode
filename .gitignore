@@ -3,3 +3,6 @@ Metrics/
 
 # Build output/generated
 target/
+
+# IDEA
+.idea/
