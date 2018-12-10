@@ -7,7 +7,7 @@ import org.junit.Test;
 public class RollDieTest {
     @Test
     public void happyPath() throws Exception {
-        final SinglePlayerGame game = new SinglePlayerGame();
+        final SinglePlayerGame game = new SinglePlayerGame(0);
 
         game.roll(3);
 
@@ -17,6 +17,10 @@ public class RollDieTest {
     private static class SinglePlayerGame extends Game {
         {
             add("::the only player's name::");
+        }
+
+        public SinglePlayerGame(int theStartingPlaceOfTheOnlyPlayer) {
+            places[0] = theStartingPlaceOfTheOnlyPlayer;
         }
 
         public int thePlaceOfTheOnlyPlayer() {
