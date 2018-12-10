@@ -19,7 +19,7 @@ public class GenerateGoldenMaster {
     }
 
     private void runGame(Path goldenMasterOutputRoot) throws IOException {
-        final Path goldenMasterOutputPath = goldenMasterOutputRoot.resolve("game-762.txt");
+        final Path goldenMasterOutputPath = goldenMasterOutputRoot.resolve(String.format("game-%s.txt", 762));
         final FileOutputStream canvas = new FileOutputStream(goldenMasterOutputPath.toFile());
         System.setOut(new PrintStream(canvas));
 
