@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Game {
-    ArrayList players = new ArrayList();
+	private final ReportMessagesToConsole reportMessagesToConsole;
+	ArrayList players = new ArrayList();
     protected int[] places = new int[6];
     int[] purses  = new int[6];
     protected boolean[] inPenaltyBox  = new boolean[6];
@@ -16,15 +17,20 @@ public class Game {
     
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
-    
-    public  Game(){
+
+	public  Game() {
+		this(new ReportMessagesToConsole());
+	}
+
+	public  Game(final ReportMessagesToConsole reportMessagesToConsole){
     	for (int i = 0; i < 50; i++) {
 			popQuestions.addLast("Pop Question " + i);
 			scienceQuestions.addLast(("Science Question " + i));
 			sportsQuestions.addLast(("Sports Question " + i));
 			rockQuestions.addLast(createRockQuestion(i));
     	}
-    }
+		this.reportMessagesToConsole = reportMessagesToConsole;
+	}
 
 	public String createRockQuestion(int index){
 		return "Rock Question " + index;
@@ -41,14 +47,10 @@ public class Game {
 	    places[howManyPlayers()] = 0;
 	    purses[howManyPlayers()] = 0;
 	    inPenaltyBox[howManyPlayers()] = false;
-	    
-	    reportMessage(playerName + " was added");
-	    reportMessage("They are player number " + players.size());
-		return true;
-	}
 
-	protected void reportMessage(final String message) {
-		System.out.println(message);
+		reportMessagesToConsole.reportMessage(playerName + " was added");
+		reportMessagesToConsole.reportMessage("They are player number " + players.size());
+		return true;
 	}
 
 	public int howManyPlayers() {
@@ -56,8 +58,8 @@ public class Game {
 	}
 
 	public void roll(int roll) {
-		reportMessage(players.get(currentPlayer) + " is the current player");
-		reportMessage("They have rolled a " + roll);
+		reportMessagesToConsole.reportMessage(players.get(currentPlayer) + " is the current player");
+		reportMessagesToConsole.reportMessage("They have rolled a " + roll);
 		
 		if (inPenaltyBox[currentPlayer]) {
 			if (roll % 2 != 0) {
@@ -81,11 +83,11 @@ public class Game {
 		
 			places[currentPlayer] = places[currentPlayer] + roll;
 			if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
-			
-			reportMessage(players.get(currentPlayer)
-					+ "'s new location is " 
+
+			reportMessagesToConsole.reportMessage(players.get(currentPlayer)
+					+ "'s new location is "
 					+ places[currentPlayer]);
-			reportMessage("The category is " + currentCategory());
+			reportMessagesToConsole.reportMessage("The category is " + currentCategory());
 			askQuestion();
 		}
 		
