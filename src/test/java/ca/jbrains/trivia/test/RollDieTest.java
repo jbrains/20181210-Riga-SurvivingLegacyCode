@@ -1,6 +1,7 @@
 package ca.jbrains.trivia.test;
 
 import com.adaptionsoft.games.uglytrivia.Game;
+import com.adaptionsoft.games.uglytrivia.ReportMessages;
 import com.adaptionsoft.games.uglytrivia.ReportMessagesToConsole;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,12 +18,7 @@ public class RollDieTest {
 
     private static class SinglePlayerGame extends Game {
         public SinglePlayerGame(int theStartingPlaceOfTheOnlyPlayer, boolean isTheOnlyPlayerInThePenaltyBox) {
-            super(new ReportMessagesToConsole() {
-                @Override
-                public void reportMessage(String message) {
-                    // Intentionally do nothing
-                }
-            });
+            super(message -> {});
             add("::the only player's name::");
             places[0] = theStartingPlaceOfTheOnlyPlayer;
             inPenaltyBox[0] = isTheOnlyPlayerInThePenaltyBox;
