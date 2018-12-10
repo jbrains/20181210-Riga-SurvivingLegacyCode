@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Game {
-	private final ReportMessagesToConsole reportMessagesToConsole;
+	private final ReportMessages reportMessages;
 	ArrayList players = new ArrayList();
     protected int[] places = new int[6];
     int[] purses  = new int[6];
@@ -22,14 +22,14 @@ public class Game {
 		this(new ReportMessagesToConsole());
 	}
 
-	public  Game(final ReportMessagesToConsole reportMessagesToConsole){
+	public  Game(final ReportMessages reportMessages){
     	for (int i = 0; i < 50; i++) {
 			popQuestions.addLast("Pop Question " + i);
 			scienceQuestions.addLast(("Science Question " + i));
 			sportsQuestions.addLast(("Sports Question " + i));
 			rockQuestions.addLast(createRockQuestion(i));
     	}
-		this.reportMessagesToConsole = reportMessagesToConsole;
+		this.reportMessages = reportMessages;
 	}
 
 	public String createRockQuestion(int index){
@@ -48,8 +48,8 @@ public class Game {
 	    purses[howManyPlayers()] = 0;
 	    inPenaltyBox[howManyPlayers()] = false;
 
-		reportMessagesToConsole.reportMessage(playerName + " was added");
-		reportMessagesToConsole.reportMessage("They are player number " + players.size());
+		reportMessages.reportMessage(playerName + " was added");
+		reportMessages.reportMessage("They are player number " + players.size());
 		return true;
 	}
 
@@ -58,8 +58,8 @@ public class Game {
 	}
 
 	public void roll(int roll) {
-		reportMessagesToConsole.reportMessage(players.get(currentPlayer) + " is the current player");
-		reportMessagesToConsole.reportMessage("They have rolled a " + roll);
+		reportMessages.reportMessage(players.get(currentPlayer) + " is the current player");
+		reportMessages.reportMessage("They have rolled a " + roll);
 		
 		if (inPenaltyBox[currentPlayer]) {
 			if (roll % 2 != 0) {
@@ -84,10 +84,10 @@ public class Game {
 			places[currentPlayer] = places[currentPlayer] + roll;
 			if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
 
-			reportMessagesToConsole.reportMessage(players.get(currentPlayer)
+			reportMessages.reportMessage(players.get(currentPlayer)
 					+ "'s new location is "
 					+ places[currentPlayer]);
-			reportMessagesToConsole.reportMessage("The category is " + currentCategory());
+			reportMessages.reportMessage("The category is " + currentCategory());
 			askQuestion();
 		}
 		
