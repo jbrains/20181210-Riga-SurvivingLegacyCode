@@ -24,7 +24,7 @@ public class CheckGoldenMaster {
     public void replaceStdout() throws Exception {
         System.setOut(productionStdout);
     }
-    
+
     @Test
     public void checkGoldenMaster() throws Exception {
         final ByteArrayOutputStream canvas = new ByteArrayOutputStream();

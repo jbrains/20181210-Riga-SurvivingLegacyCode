@@ -31,5 +31,15 @@ public class RollDieTest {
         public int thePlaceOfTheOnlyPlayer() {
             return places[0];
         }
+
+        @Override
+        protected void reportMessage(String message) {
+            // Intentionally do nothing
+        }
+
+        @Override
+        protected void askQuestion() {
+            // Intentionally do nothing
+        }
     }
 }
