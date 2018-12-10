@@ -15,7 +15,7 @@ public class GenerateGoldenMaster {
     public static void main(String[] args) throws Exception {
         final Path goldenMasterOutputRoot = Paths.get("test", "data");
         Files.createDirectories(goldenMasterOutputRoot);
-        final Path goldenMasterOutputPath = goldenMasterOutputRoot.resolve("game.txt");
+        final Path goldenMasterOutputPath = goldenMasterOutputRoot.resolve("game-762.txt");
         final FileOutputStream canvas = new FileOutputStream(goldenMasterOutputPath.toFile());
         System.setOut(new PrintStream(canvas));
 
@@ -25,7 +25,7 @@ public class GenerateGoldenMaster {
         aGame.add("Pat");
         aGame.add("Sue");
 
-        Random rand = new Random();
+        Random rand = new Random(762);
 
         do {
             aGame.roll(rand.nextInt(5) + 1);
