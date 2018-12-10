@@ -2,12 +2,23 @@ package ca.jbrains.trivia.test;
 
 import com.adaptionsoft.games.uglytrivia.Game;
 
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Random;
 
 public class GenerateGoldenMaster {
     private static boolean notAWinner;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        final Path goldenMasterOutputRoot = Paths.get("test", "data");
+        Files.createDirectories(goldenMasterOutputRoot);
+        final Path goldenMasterOutputPath = goldenMasterOutputRoot.resolve("game.txt");
+        final FileOutputStream canvas = new FileOutputStream(goldenMasterOutputPath.toFile());
+        System.setOut(new PrintStream(canvas));
+
         Game aGame = new Game();
 
         aGame.add("Chet");
@@ -25,5 +36,8 @@ public class GenerateGoldenMaster {
                 notAWinner = aGame.wasCorrectlyAnswered();
             }
         } while (notAWinner);
+
+        canvas.flush();
+        canvas.close();
     }
 }
