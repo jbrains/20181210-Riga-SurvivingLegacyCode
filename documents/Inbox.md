@@ -4,6 +4,7 @@
   - Should we look for a replacement report?
 - Convert tabs to spaces and fix formatting.
 - Add code to actually let the players answer questions. Why isn't this already done?!
+- When can we safely fix the typo "corrent"?!
 
 ## Design Ideas
 
