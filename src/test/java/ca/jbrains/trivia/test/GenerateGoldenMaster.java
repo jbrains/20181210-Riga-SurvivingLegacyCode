@@ -19,7 +19,11 @@ public class GenerateGoldenMaster {
     }
 
     private void runGame(Path goldenMasterOutputRoot) throws IOException {
-        final Path goldenMasterOutputPath = goldenMasterOutputRoot.resolve(String.format("game-%s.txt", 762));
+        runGame(goldenMasterOutputRoot, 762);
+    }
+
+    private void runGame(Path goldenMasterOutputRoot, final int gameNumber) throws IOException {
+        final Path goldenMasterOutputPath = goldenMasterOutputRoot.resolve(String.format("game-%s.txt", gameNumber));
         final FileOutputStream canvas = new FileOutputStream(goldenMasterOutputPath.toFile());
         System.setOut(new PrintStream(canvas));
 
@@ -29,7 +33,7 @@ public class GenerateGoldenMaster {
         aGame.add("Pat");
         aGame.add("Sue");
 
-        Random rand = new Random(762);
+        Random rand = new Random(gameNumber);
 
         boolean notAWinner;
         do {
