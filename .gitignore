@@ -1,0 +1,5 @@
+# Reports, which appear obsolete, because nobody knows how to generate new versions.
+Metrics/
+
+# Build output/generated
+target/
