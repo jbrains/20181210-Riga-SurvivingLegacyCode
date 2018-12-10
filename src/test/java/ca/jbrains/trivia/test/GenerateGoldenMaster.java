@@ -4,6 +4,7 @@ import com.adaptionsoft.games.uglytrivia.Game;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,12 +20,11 @@ public class GenerateGoldenMaster {
     }
 
     private void runGame(Path goldenMasterOutputRoot) throws IOException {
-        runGame(goldenMasterOutputRoot, 762);
+        runGame(762,
+                new FileOutputStream(goldenMasterOutputRoot.resolve(String.format("game-%s.txt", 762)).toFile()));
     }
 
-    private void runGame(Path goldenMasterOutputRoot, final int gameNumber) throws IOException {
-        final Path goldenMasterOutputPath = goldenMasterOutputRoot.resolve(String.format("game-%s.txt", gameNumber));
-        final FileOutputStream canvas = new FileOutputStream(goldenMasterOutputPath.toFile());
+    private void runGame(final int gameNumber, final OutputStream canvas) throws IOException {
         System.setOut(new PrintStream(canvas));
 
         Game aGame = new Game();
