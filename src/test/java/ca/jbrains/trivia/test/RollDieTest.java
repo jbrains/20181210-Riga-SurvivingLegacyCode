@@ -7,7 +7,7 @@ import org.junit.Test;
 public class RollDieTest {
     @Test
     public void happyPath() throws Exception {
-        final SinglePlayerGame game = new SinglePlayerGame(0);
+        final SinglePlayerGame game = SinglePlayerGame.withPlayerNotInPenaltyBoxStartingAtPlace(0);
 
         game.roll(3);
 
@@ -15,9 +15,17 @@ public class RollDieTest {
     }
 
     private static class SinglePlayerGame extends Game {
-        public SinglePlayerGame(int theStartingPlaceOfTheOnlyPlayer) {
+        public SinglePlayerGame(int theStartingPlaceOfTheOnlyPlayer, boolean isTheOnlyPlayerInThePenaltyBox) {
             add("::the only player's name::");
             places[0] = theStartingPlaceOfTheOnlyPlayer;
+            inPenaltyBox[0] = isTheOnlyPlayerInThePenaltyBox;
+        }
+
+        // REFACTOR Test Data Builder pattern: http://defragdev.com/blog/?p=147
+        public static SinglePlayerGame withPlayerNotInPenaltyBoxStartingAtPlace(final int theStartingPlaceOfTheOnlyPlayer) {
+            return new SinglePlayerGame(
+                    theStartingPlaceOfTheOnlyPlayer,
+                    false );
         }
 
         public int thePlaceOfTheOnlyPlayer() {
