@@ -10,7 +10,6 @@ import java.nio.file.Paths;
 import java.util.Random;
 
 public class GenerateGoldenMaster {
-    private static boolean notAWinner;
 
     public static void main(String[] args) throws Exception {
         final Path goldenMasterOutputRoot = Paths.get("test", "data");
@@ -27,6 +26,7 @@ public class GenerateGoldenMaster {
 
         Random rand = new Random(762);
 
+        boolean notAWinner;
         do {
             aGame.roll(rand.nextInt(5) + 1);
 
