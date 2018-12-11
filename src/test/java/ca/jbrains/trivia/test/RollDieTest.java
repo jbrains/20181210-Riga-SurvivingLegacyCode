@@ -1,8 +1,6 @@
 package ca.jbrains.trivia.test;
 
 import com.adaptionsoft.games.uglytrivia.Game;
-import com.adaptionsoft.games.uglytrivia.ReportMessages;
-import com.adaptionsoft.games.uglytrivia.ReportMessagesToConsole;
 import org.junit.Assert;
 import org.junit.Test;
 
