@@ -109,21 +109,21 @@ public class Game {
 	}
 
 	protected void askQuestion() {
+	    final String nextQuestion = questionDeck.nextQuestionInCategory(currentCategory());
+	    System.out.println(nextQuestion);
+
+	    // Preserve the state of the legacy fields until we confirm that nobody uses them.
 		if (currentCategory() == "Pop") {
-			questionDeck.nextQuestionInCategory(currentCategory());
-			System.out.println(popQuestions.removeFirst());
+            popQuestions.removeFirst();
 		}
 		if (currentCategory() == "Science") {
-			questionDeck.nextQuestionInCategory(currentCategory());
-			System.out.println(scienceQuestions.removeFirst());
+            scienceQuestions.removeFirst();
 		}
 		if (currentCategory() == "Sports") {
-			questionDeck.nextQuestionInCategory(currentCategory());
-			System.out.println(sportsQuestions.removeFirst());
+            sportsQuestions.removeFirst();
 		}
 		if (currentCategory() == "Rock") {
-			questionDeck.nextQuestionInCategory(currentCategory());
-			System.out.println(rockQuestions.removeFirst());
+            rockQuestions.removeFirst();
 		}
 	}
 
