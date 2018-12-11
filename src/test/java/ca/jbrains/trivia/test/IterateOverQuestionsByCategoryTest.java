@@ -19,7 +19,7 @@ public class IterateOverQuestionsByCategoryTest {
     }
 
     @Test
-    public void cycleThroughQuestionsInMultipleCategories() throws Exception {
+    public void iterateOverQuestionsInMultipleCategories() throws Exception {
         Assert.assertEquals(
                 List.of(
                         "::rock question 1::",
@@ -42,6 +42,48 @@ public class IterateOverQuestionsByCategoryTest {
                                 "science", generateQuestions("science", 5).iterator(),
                                 "pop", generateQuestions("pop", 5).iterator(),
                                 "sports", generateQuestions("sports", 5).iterator()
+                        ),
+                        Stream.of(
+                                "rock",
+                                "rock",
+                                "science",
+                                "pop",
+                                "rock",
+                                "sports",
+                                "science",
+                                "sports",
+                                "sports",
+                                "sports",
+                                "science",
+                                "rock",
+                                "pop"))
+        );
+    }
+
+    @Test
+    public void cycleThroughQuestionsInMultipleCategoriesEvenWhenRunningOutOfQuestions() throws Exception {
+        Assert.assertEquals(
+                List.of(
+                        "::rock question 1::",
+                        "::rock question 2::",
+                        "::science question 1::",
+                        "::pop question 1::",
+                        "::rock question 1::",
+                        "::sports question 1::",
+                        "::science question 2::",
+                        "::sports question 2::",
+                        "::sports question 3::",
+                        "::sports question 1::",
+                        "::science question 3::",
+                        "::rock question 2::",
+                        "::pop question 1::"
+                ),
+                iterateOverQuestionsByCategory(
+                        HashMap.of(
+                                "rock", generateQuestions("rock", 2).cycle().iterator(),
+                                "science", generateQuestions("science", 3).cycle().iterator(),
+                                "pop", generateQuestions("pop", 1).cycle().iterator(),
+                                "sports", generateQuestions("sports", 3).cycle().iterator()
                         ),
                         Stream.of(
                                 "rock",
