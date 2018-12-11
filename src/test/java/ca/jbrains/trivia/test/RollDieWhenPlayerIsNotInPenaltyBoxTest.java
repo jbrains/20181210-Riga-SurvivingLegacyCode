@@ -4,14 +4,19 @@ import com.adaptionsoft.games.uglytrivia.Game;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class RollDieTest {
+public class RollDieWhenPlayerIsNotInPenaltyBoxTest {
+
     @Test
     public void happyPath() throws Exception {
-        final SinglePlayerGame game = new SinglePlayerGameBuilder().withPlayerInPenaltyBox(false).withPlayerStartingAtPlace(0).build();
+        Assert.assertEquals(3, movePlayer(0, 3));
+    }
 
-        game.roll(3);
+    private int movePlayer(final int fromPlace, final int byRolling) {
+        final SinglePlayerGame game = new SinglePlayerGameBuilder().withPlayerInPenaltyBox(false).withPlayerStartingAtPlace(fromPlace).build();
 
-        Assert.assertEquals(3, game.thePlaceOfTheOnlyPlayer());
+        game.roll(byRolling);
+
+        return game.thePlaceOfTheOnlyPlayer();
     }
 
     private static class SinglePlayerGameBuilder {
