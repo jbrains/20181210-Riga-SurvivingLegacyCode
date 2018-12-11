@@ -38,10 +38,10 @@ public class IterateOverQuestionsByCategoryTest {
                 ),
                 iterateOverQuestionsByCategory(
                         HashMap.of(
-                                "rock", generateQuestions("rock", 5).iterator(),
-                                "science", generateQuestions("science", 5).iterator(),
-                                "pop", generateQuestions("pop", 5).iterator(),
-                                "sports", generateQuestions("sports", 5).iterator()
+                                "rock", cycleThroughQuestions(generateQuestions("rock", 5)),
+                                "science", cycleThroughQuestions(generateQuestions("science", 5)),
+                                "pop", cycleThroughQuestions(generateQuestions("pop", 5)),
+                                "sports", cycleThroughQuestions(generateQuestions("sports", 5))
                         ),
                         Stream.of(
                                 "rock",
