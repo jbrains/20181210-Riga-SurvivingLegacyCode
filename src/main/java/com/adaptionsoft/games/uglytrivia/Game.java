@@ -109,20 +109,21 @@ public class Game {
 	}
 
 	protected void askQuestion() {
-	    final String nextQuestion = questionDeck.nextQuestionInCategory(currentCategory());
+        final String currentCategoryName = currentCategory();
+        final String nextQuestion = questionDeck.nextQuestionInCategory(currentCategoryName);
 	    System.out.println(nextQuestion);
 
 	    // Preserve the state of the legacy fields until we confirm that nobody uses them.
-		if (currentCategory() == "Pop") {
+		if (currentCategoryName == "Pop") {
             popQuestions.removeFirst();
 		}
-		if (currentCategory() == "Science") {
+		if (currentCategoryName == "Science") {
             scienceQuestions.removeFirst();
 		}
-		if (currentCategory() == "Sports") {
+		if (currentCategoryName == "Sports") {
             sportsQuestions.removeFirst();
 		}
-		if (currentCategory() == "Rock") {
+		if (currentCategoryName == "Rock") {
             rockQuestions.removeFirst();
 		}
 	}
