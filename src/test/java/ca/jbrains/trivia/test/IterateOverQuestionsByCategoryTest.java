@@ -12,9 +12,9 @@ public class IterateOverQuestionsByCategoryTest {
                         "::question 1::", "::question 2::", "::question 3::",
                         "::question 1::", "::question 2::", "::question 3::"
                 ),
-                iterateOverQuestions(
-                        List.of("::question 1::", "::question 2::", "::question 3::")
-                ).take(9)
+                cycleThroughQuestions(
+                        Stream.of("::question 1::", "::question 2::", "::question 3::")
+                ).take(9).toList()
         );
     }
 
@@ -80,10 +80,10 @@ public class IterateOverQuestionsByCategoryTest {
                 ),
                 iterateOverQuestionsByCategory(
                         HashMap.of(
-                                "rock", generateQuestions("rock", 2).cycle().iterator(),
-                                "science", generateQuestions("science", 3).cycle().iterator(),
-                                "pop", generateQuestions("pop", 1).cycle().iterator(),
-                                "sports", generateQuestions("sports", 3).cycle().iterator()
+                                "rock", cycleThroughQuestions(generateQuestions("rock", 2)),
+                                "science", cycleThroughQuestions(generateQuestions("science", 3)),
+                                "pop", cycleThroughQuestions(generateQuestions("pop", 1)),
+                                "sports", cycleThroughQuestions(generateQuestions("sports", 3))
                         ),
                         Stream.of(
                                 "rock",
@@ -114,7 +114,7 @@ public class IterateOverQuestionsByCategoryTest {
         return Stream.rangeClosed(1, howMany).map(n -> String.format("::%s question %d::", categoryName, n));
     }
 
-    private Traversable<String> iterateOverQuestions(List<String> questions) {
-        return questions.toStream().cycle();
+    private Iterator<String> cycleThroughQuestions(Stream<String> questions) {
+        return questions.toStream().cycle().iterator();
     }
 }
