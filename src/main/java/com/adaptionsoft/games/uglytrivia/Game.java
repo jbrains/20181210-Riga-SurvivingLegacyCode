@@ -112,23 +112,26 @@ public class Game {
         final String currentCategoryName = currentCategory();
         final String nextQuestion = questionDeck.nextQuestionInCategory(currentCategoryName);
 	    System.out.println(nextQuestion);
+        legacyAskQuestionInCategoryNamed(currentCategoryName);
+    }
 
-	    // Preserve the state of the legacy fields until we confirm that nobody uses them.
-		if (currentCategoryName == "Pop") {
+    private void legacyAskQuestionInCategoryNamed(String currentCategoryName) {
+        // Preserve the state of the legacy fields until we confirm that nobody uses them.
+        if (currentCategoryName == "Pop") {
             popQuestions.removeFirst();
-		}
-		if (currentCategoryName == "Science") {
+        }
+        if (currentCategoryName == "Science") {
             scienceQuestions.removeFirst();
-		}
-		if (currentCategoryName == "Sports") {
+        }
+        if (currentCategoryName == "Sports") {
             sportsQuestions.removeFirst();
-		}
-		if (currentCategoryName == "Rock") {
+        }
+        if (currentCategoryName == "Rock") {
             rockQuestions.removeFirst();
-		}
-	}
+        }
+    }
 
-	private String currentCategory() {
+    private String currentCategory() {
 		return Board.category(places[currentPlayer]);
 	}
 
