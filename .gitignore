@@ -3,6 +3,7 @@ Metrics/
 
 # Build output/generated
 target/
+.jqwik-database
 
 # IDEA
 .idea/
