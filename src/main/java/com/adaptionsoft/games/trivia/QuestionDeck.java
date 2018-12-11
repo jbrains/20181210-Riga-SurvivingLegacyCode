@@ -1,4 +1,4 @@
-package ca.jbrains.trivia.test;
+package com.adaptionsoft.games.trivia;
 
 import io.vavr.collection.HashMap;
 import io.vavr.collection.Iterator;

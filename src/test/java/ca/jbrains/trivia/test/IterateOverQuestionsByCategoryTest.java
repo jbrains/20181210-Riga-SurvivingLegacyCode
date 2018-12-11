@@ -1,5 +1,6 @@
 package ca.jbrains.trivia.test;
 
+import com.adaptionsoft.games.trivia.QuestionDeck;
 import io.vavr.collection.*;
 import org.junit.Assert;
 import org.junit.Test;

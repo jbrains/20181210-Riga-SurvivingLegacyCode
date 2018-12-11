@@ -1,6 +1,10 @@
 package com.adaptionsoft.games.uglytrivia;
 
 import com.adaptionsoft.games.trivia.Board;
+import com.adaptionsoft.games.trivia.QuestionDeck;
+import io.vavr.collection.HashMap;
+import io.vavr.collection.List;
+import io.vavr.collection.Stream;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -19,18 +23,27 @@ public class Game {
     
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
+	private QuestionDeck questionDeck;
 
 	public  Game() {
 		this(new ReportMessagesToConsole());
 	}
 
 	public  Game(final ReportMessages reportMessages){
+		// REFACTOR Create QuestionDeck directly, then populate legacy fields from it.
     	for (int i = 0; i < 50; i++) {
 			popQuestions.addLast("Pop Question " + i);
 			scienceQuestions.addLast(("Science Question " + i));
 			sportsQuestions.addLast(("Sports Question " + i));
 			rockQuestions.addLast(createRockQuestion(i));
     	}
+    	// We need deep copies here to avoid concurrent modification errors
+		questionDeck = QuestionDeck.fromQuestions(HashMap.of(
+				"Pop", Stream.ofAll(new ArrayList(popQuestions)),
+				"Science", Stream.ofAll(new ArrayList(scienceQuestions)),
+				"Sports", Stream.ofAll(new ArrayList(sportsQuestions)),
+				"Rock", Stream.ofAll(new ArrayList(rockQuestions))
+		));
 		this.reportMessages = reportMessages;
 	}
 
@@ -96,14 +109,22 @@ public class Game {
 	}
 
 	protected void askQuestion() {
-		if (currentCategory() == "Pop")
+		if (currentCategory() == "Pop") {
+			questionDeck.nextQuestionInCategory(currentCategory());
 			System.out.println(popQuestions.removeFirst());
-		if (currentCategory() == "Science")
+		}
+		if (currentCategory() == "Science") {
+			questionDeck.nextQuestionInCategory(currentCategory());
 			System.out.println(scienceQuestions.removeFirst());
-		if (currentCategory() == "Sports")
+		}
+		if (currentCategory() == "Sports") {
+			questionDeck.nextQuestionInCategory(currentCategory());
 			System.out.println(sportsQuestions.removeFirst());
-		if (currentCategory() == "Rock")
+		}
+		if (currentCategory() == "Rock") {
+			questionDeck.nextQuestionInCategory(currentCategory());
 			System.out.println(rockQuestions.removeFirst());
+		}
 	}
 
 	private String currentCategory() {
