@@ -13,7 +13,10 @@ public class Board {
         if (place == 2) return rotatingCategoryNames[place % 4];
         if (place == 6) return rotatingCategoryNames[place % 4];
         if (place == 10) return rotatingCategoryNames[place % 4];
-        
+        if (place == 3) return rotatingCategoryNames[place % 4];
+        if (place == 7) return rotatingCategoryNames[place % 4];
+        if (place == 11) return rotatingCategoryNames[place % 4];
+
         return "Rock";
     }
 }
