@@ -1,5 +1,7 @@
 package com.adaptionsoft.games.uglytrivia;
 
+import com.adaptionsoft.games.trivia.Board;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -105,20 +107,7 @@ public class Game {
 	}
 
 	private String currentCategory() {
-		return category(places[currentPlayer]);
-	}
-	
-	public static String category(int place) {
-		if (place == 0) return "Pop";
-		if (place == 4) return "Pop";
-		if (place == 8) return "Pop";
-		if (place == 1) return "Science";
-		if (place == 5) return "Science";
-		if (place == 9) return "Science";
-		if (place == 2) return "Sports";
-		if (place == 6) return "Sports";
-		if (place == 10) return "Sports";
-		return "Rock";
+		return Board.category(places[currentPlayer]);
 	}
 
 	public boolean wasCorrectlyAnswered() {

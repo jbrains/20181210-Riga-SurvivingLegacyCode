@@ -1,6 +1,6 @@
 package ca.jbrains.trivia.test;
 
-import com.adaptionsoft.games.uglytrivia.Game;
+import com.adaptionsoft.games.trivia.Board;
 import net.jqwik.api.ForAll;
 import net.jqwik.api.Property;
 import org.junit.Assert;
@@ -12,7 +12,7 @@ public class ChooseCategoryByPlaceTest {
         final String[] expectedCategoriesByPlaceOnTheBoard = {"Pop", "Science", "Sports", "Rock", "Pop", "Science", "Sports", "Rock", "Pop", "Science", "Sports", "Rock"};
 
         for (int place = 0; place < 12; place++) {
-            Assert.assertEquals(expectedCategoriesByPlaceOnTheBoard[place], Game.category(place));
+            Assert.assertEquals(expectedCategoriesByPlaceOnTheBoard[place], Board.category(place));
         }
     }
 
@@ -21,6 +21,6 @@ public class ChooseCategoryByPlaceTest {
     @Property
     public boolean everyOtherPlaceIsRock(@ForAll int place) {
         if (place >= 0 && place < 12) return true;
-        return "Rock".equalsIgnoreCase(Game.category(place));
+        return "Rock".equalsIgnoreCase(Board.category(place));
     }
 }
