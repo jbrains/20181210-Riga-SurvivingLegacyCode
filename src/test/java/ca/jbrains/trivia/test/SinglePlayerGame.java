@@ -15,7 +15,7 @@ public class SinglePlayerGame extends Game {
     }
 
     @Override
-    protected void askQuestion() {
+    protected void askQuestion(final String categoryName) {
         // Intentionally do nothing
     }
 }

@@ -3,7 +3,6 @@ package com.adaptionsoft.games.uglytrivia;
 import com.adaptionsoft.games.trivia.Board;
 import com.adaptionsoft.games.trivia.QuestionDeck;
 import io.vavr.collection.HashMap;
-import io.vavr.collection.List;
 import io.vavr.collection.Stream;
 
 import java.util.ArrayList;
@@ -88,7 +87,7 @@ public class Game {
 						+ "'s new location is " 
 						+ places[currentPlayer]);
 				System.out.println("The category is " + currentCategory());
-				askQuestion();
+				askQuestion(currentCategory());
 			} else {
 				System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
 				isGettingOutOfPenaltyBox = false;
@@ -103,16 +102,14 @@ public class Game {
 					+ "'s new location is "
 					+ places[currentPlayer]);
 			reportMessages.reportMessage("The category is " + currentCategory());
-			askQuestion();
+			askQuestion(currentCategory());
 		}
 		
 	}
 
-	protected void askQuestion() {
-        final String currentCategoryName = currentCategory();
-        final String nextQuestion = questionDeck.nextQuestionInCategory(currentCategoryName);
-	    System.out.println(nextQuestion);
-        legacyAskQuestionInCategoryNamed(currentCategoryName);
+	protected void askQuestion(final String categoryName) {
+        System.out.println(questionDeck.nextQuestionInCategory(categoryName));
+        legacyAskQuestionInCategoryNamed(categoryName);
     }
 
     private void legacyAskQuestionInCategoryNamed(String currentCategoryName) {
