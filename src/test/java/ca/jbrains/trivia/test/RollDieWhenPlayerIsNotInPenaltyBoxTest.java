@@ -7,8 +7,18 @@ import org.junit.Test;
 public class RollDieWhenPlayerIsNotInPenaltyBoxTest {
 
     @Test
-    public void happyPath() throws Exception {
+    public void simpleHappyPaths() throws Exception {
         Assert.assertEquals(3, movePlayer(0, 3));
+        Assert.assertEquals(6, movePlayer(0, 6));
+        Assert.assertEquals(11, movePlayer(5, 6));
+    }
+
+    @Test
+    public void movingPastTheEdgeOfTheBoard() throws Exception {
+        Assert.assertEquals(0, movePlayer(6, 6));
+        Assert.assertEquals(0, movePlayer(11, 1));
+        Assert.assertEquals(1, movePlayer(11, 2));
+        Assert.assertEquals(5, movePlayer(11, 6));
     }
 
     private int movePlayer(final int fromPlace, final int byRolling) {
