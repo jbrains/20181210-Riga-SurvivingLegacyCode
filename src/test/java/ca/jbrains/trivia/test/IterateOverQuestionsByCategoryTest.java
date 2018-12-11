@@ -37,12 +37,12 @@ public class IterateOverQuestionsByCategoryTest {
                         "::pop question 2::"
                 ),
                 iterateOverQuestionsByCategory(
-                        HashMap.of(
-                                "rock", cycleThroughQuestions(generateQuestions("rock", 5)),
-                                "science", cycleThroughQuestions(generateQuestions("science", 5)),
-                                "pop", cycleThroughQuestions(generateQuestions("pop", 5)),
-                                "sports", cycleThroughQuestions(generateQuestions("sports", 5))
-                        ),
+                        createQuestionDeck(HashMap.of(
+                                "rock", generateQuestions("rock", 5),
+                                "science", generateQuestions("science", 5),
+                                "pop", generateQuestions("pop", 5),
+                                "sports", generateQuestions("sports", 5)
+                        )),
                         Stream.of(
                                 "rock",
                                 "rock",
@@ -79,12 +79,12 @@ public class IterateOverQuestionsByCategoryTest {
                         "::pop question 1::"
                 ),
                 iterateOverQuestionsByCategory(
-                        HashMap.of(
-                                "rock", cycleThroughQuestions(generateQuestions("rock", 2)),
-                                "science", cycleThroughQuestions(generateQuestions("science", 3)),
-                                "pop", cycleThroughQuestions(generateQuestions("pop", 1)),
-                                "sports", cycleThroughQuestions(generateQuestions("sports", 3))
-                        ),
+                        createQuestionDeck(HashMap.of(
+                                "rock", generateQuestions("rock", 2),
+                                "science", generateQuestions("science", 3),
+                                "pop", generateQuestions("pop", 1),
+                                "sports", generateQuestions("sports", 3)
+                        )),
                         Stream.of(
                                 "rock",
                                 "rock",
@@ -100,6 +100,10 @@ public class IterateOverQuestionsByCategoryTest {
                                 "rock",
                                 "pop"))
         );
+    }
+
+    private HashMap<String, Iterator<String>> createQuestionDeck(final HashMap<String, Stream<String>> questionsByCategoryName) {
+        return questionsByCategoryName.mapValues(this::cycleThroughQuestions);
     }
 
     private Traversable<String> iterateOverQuestionsByCategory(HashMap<String, Iterator<String>> questionsByCategoryName, Stream<String> categoryNames) {
